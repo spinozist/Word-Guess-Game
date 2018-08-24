@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.html" />
+    <script src="assets/javascript/game.js"></script>
+</head>
+
+<body>
+    <h1>Hangman Game</h1>
+    <div id="letter-box">
+        <p id="random-word"></p>
+        <p id="parsed-word"></p>
+        <span id="letters"></span>
+        <!-- Write HTML based on randomly selected word -->
+        <!-- Reveal letters when guessed -->
+    </div>
+    <div id="guess-box">
+        <!-- List guessed letters -->
+    </div>
+    <div id="score box">
+        <!-- Display number of guesses, misses, and remaining guesses -->
+</body>
+<script>
+
+    // random word generator
+
+    var wordList = [
+        "dog",
+        "racoon",
+        "monkey",
+        "squirrel",
+        "pig",
+        "horse",
+        "donkey"
+    ];
+    var selectWord = wordList[Math.floor(Math.random() * wordList.length)];
+    var wordText = document.getElementById('random-word');
+    var wordLetters = Array.from(selectWord);
+    var parsedWord = document.getElementById('parsed-word');
+    var letterGuess = document.getElementById('letters');
+
+    wordText.textContent = selectWord;
+
+    // display parsed word
+
+    for (var i = 0; i < wordLetters.length; i++) {
+        document.write(wordLetters[i] + " / ");
+    };
+
+    // user guess conditionals
+
+    document.onkeyup = function (event) {
+
+        var userGuess = event.key;
+        letterGuess.textContent = userGuess;
+
+        for (var i = 0; i < wordLetters.length; i++) {
+            if (userGuess === wordLetters[i]) {
+                document.write("That's in the word");
+            };
+
+        };
+    };
+</script>
+
+</html>
