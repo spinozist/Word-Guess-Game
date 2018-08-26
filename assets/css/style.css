@@ -1,0 +1,28 @@
+body {
+    text-align: center;
+}
+
+div {
+    border: solid;
+}
+
+#letter-box {
+    background-color: rgb(212, 212, 94);
+}
+
+#result {
+    background-color: aquamarine;
+}
+
+#guessed-letters {
+    background-color: grey;
+}
+
+#guess-box {
+    background-color: blueviolet;
+}
+
+#score-box {
+    background-color: orange;
+}
+
