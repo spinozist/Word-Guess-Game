@@ -14,12 +14,13 @@ var wordList = [
 var selectWord = wordList[Math.floor(Math.random() * wordList.length)];
 
 //Game interface and logic//
-var wordView = [];
-var dialogue = "dialogue test";
-var miss = "miss test";
-var guessList = "guessList test";
 
-document.onkeyup = function () {
+document.onkeyup = function (event) {
+    wordView = event.key;
+    dialogue = "dialogue test";
+    miss = "miss test";
+    guessList = "guessList test";  
+
     writePage();
 };
 
