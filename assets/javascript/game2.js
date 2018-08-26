@@ -16,7 +16,7 @@ var selectWord = wordList[Math.floor(Math.random() * wordList.length)];
 //Game interface and logic//
 
 document.onkeyup = function (event) {
-    wordView = event.key;
+    wordView = selectWord;
     dialogue = "dialogue test";
     miss = "miss test";
     guessList = "guessList test";  
