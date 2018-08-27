@@ -24,7 +24,14 @@ var selectWord = wordList[Math.floor(Math.random() * wordList.length)];
 var correctLetters = Array.from(selectWord);
 
 var wordView = [];
-document.getElementById('wordView').innerHTML = wordView;
+
+for (var i = 0; i < correctLetters.length; i++) {
+    wordView.splice(i, 1, "<span>_</span>");
+}
+
+dialogue = "Guess a letter."
+
+writePage();
 
 
 
