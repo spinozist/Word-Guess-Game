@@ -12,6 +12,7 @@ var wordList = [
 var dialogue = [];
 var miss = 0;
 var guessList = [];
+var correctList = [];
 
 //Select word at random//
 
@@ -21,8 +22,9 @@ var selectWord = wordList[Math.floor(Math.random() * wordList.length)];
 
 var correctLetters = Array.from(selectWord);
 
-wordView = selectWord;
+var wordView = [];
 document.getElementById('wordView').innerHTML = wordView;
+
 
 
 document.onkeydown = function (event) {
@@ -30,8 +32,22 @@ document.onkeydown = function (event) {
     var userInput = event.key;
 
     if (correctLetters.includes(userInput)) {
-        dialogue = "Great Job!";
-    } else {
+
+        correctList.push(userInput);
+
+        for (var i =0; i < correctLetters.length; i++) {
+            if (correctList.includes(correctLetters[i])) {
+                wordView.splice(i, 1, "<span>" + correctLetters[i] + "</span>");
+                dialogue = "Great Job!";
+                writePage();
+            } else {
+                wordView.splice(i, 1, "<span>_</span>");
+            }
+
+        }
+    }
+    
+    else {
         if (guessList.includes(userInput)) {
             dialogue = "You already guessed that letter. Guess another.";
         } else {
