@@ -72,7 +72,7 @@ document.onkeydown = function (event) {
 // Writes to page //
 
 function writePage() {
-    document.getElementById('wordView').innerHTML = wordView;
+    document.getElementById('wordView').innerHTML = wordView.join("");
     document.getElementById('dialogueView').innerText = dialogue;
     document.getElementById('missView').innerText = miss;
     document.getElementById('guessListView').innerHTML = guessList;
