@@ -20,6 +20,7 @@ var selectWord = wordList[Math.floor(Math.random() * wordList.length)];
 
 //Game interface and logic//
 
+
 var correctLetters = Array.from(selectWord);
 
 var wordView = [];
@@ -35,7 +36,7 @@ document.onkeydown = function (event) {
 
         correctList.push(userInput);
 
-        for (var i =0; i < correctLetters.length; i++) {
+        for (var i = 0; i < correctLetters.length; i++) {
             if (correctList.includes(correctLetters[i])) {
                 wordView.splice(i, 1, "<span>" + correctLetters[i] + "</span>");
                 dialogue = "Great Job!";
@@ -46,7 +47,7 @@ document.onkeydown = function (event) {
 
         }
     }
-    
+
     else {
         if (guessList.includes(userInput)) {
             dialogue = "You already guessed that letter. Guess another.";
@@ -55,7 +56,7 @@ document.onkeydown = function (event) {
             guessList.push(userInput);
             miss++;
         }
-      
+
     }
 
     writePage();

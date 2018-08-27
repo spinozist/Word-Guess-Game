@@ -5,6 +5,11 @@ body {
 
 #wordView {
     font-size: 36px;
+    background-color: blueviolet;
+    color: beige;
+    padding: 20px;
+    opacity: .75;
+    margin-bottom: 10px;
 }
 
 #dialogueView, 
