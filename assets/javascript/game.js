@@ -1,43 +1,104 @@
-// random word generator
-
 
 var wordList = [
-    "dog",
-    "racoon",
-    "monkey",
-    "squirrel",
-    "pig",
-    "horse",
-    "donkey"
+    "ipseity",
+    "ontology",
+    "autopoiesis",
+    "assemblage",
+    "différance ",
+    "virtual",
+    "becoming",
+    "epistemology",
 ];
+
+var wordDef = [
+    "(n): individual identity : SELFHOOD",
+    "(n): : a particular theory about the nature of being or the kinds of things that have existence",
+    "(n): the property of a living system (such as a bacterial cell or a multicellular organism) that allows it to maintain and renew itself by regulating its composition and conserving its boundaries",
+    "(n): a collection of persons or things : GATHERING",
+    "(n): difference and deferral of meaning",
+    "(adj): of, relating to, or being a hypothetical particle whose existence is inferred from indirect evidence def",
+    "(n): the process of coming to be something or of passing into a state",
+    "(n): the study or a theory of the nature and grounds of knowledge especially with reference to its limits and validity",
+];
+
+
+var dialogue = [];
+var miss = 0;
+var guessList = [];
+var correctList = [];
+var defDisplay = [];
+var resetButton = [];
+
+//Select word at random//
+
 var selectWord = wordList[Math.floor(Math.random() * wordList.length)];
-var wordText = document.getElementById('random-word');
-var wordLetters = Array.from(selectWord);
-var parsedWord = document.getElementById('parsed-word');
-var letterGuess = document.getElementById('letters');
-var displayResult = document.getElementById('dialogue')
-wordText.textContent = selectWord;
 
-// display parsed word
+//Game interface and logic//
 
-for (var i = 0; i < wordLetters.length; i++) {
-    document.write(wordLetters[i] + " / ");
+
+var correctLetters = Array.from(selectWord);
+
+var wordView = [];
+
+for (var i = 0; i < correctLetters.length; i++) {
+    wordView.splice(i, 1, "<span>_</span>");
+}
+
+dialogue = "Guess a letter."
+
+writePage();
+
+
+
+document.onkeydown = function (event) {
+
+    var userInput = event.key;
+
+    if (guessList.length < 9) {
+
+        if (correctLetters.includes(userInput)) {
+
+            correctList.push(userInput);
+    
+            for (var i = 0; i < correctLetters.length; i++) {
+                if (correctList.includes(correctLetters[i])) {
+                    wordView.splice(i, 1, "<span>" + correctLetters[i] + "</span>");
+                    dialogue = "Great Job!";
+                    writePage();
+                } else {
+                    wordView.splice(i, 1, "<span>_</span>");
+                }
+            }
+        }
+    
+        else {
+            if (guessList.includes(userInput)) {
+                dialogue = "You already guessed that letter. Guess another.";
+            } else {
+                dialogue = "Nope! Try again.";
+                guessList.push(userInput);
+                miss++;
+            }
+        }
+    }
+
+    else {
+        defDisplay = "<div id='def'>" + wordDef[wordList.indexOf (selectWord)] + "</div>";
+        resetButton = "<input id='resetButton' type='button' value='Try Again' onClick='window.location.reload()'>";
+    }
+
+
+
+    writePage();
 };
 
-// user guess conditionals
+// Writes to page //
 
-document.onkeyup = function (event) {
-
-    var userGuess = event.key;
-    letterGuess.textContent = userGuess;
-
-    for (var i = 0; i < wordLetters.length; i++) {
-        if (userGuess === wordLetters[i]) {
-            displayResult.textContent = "That's in the word";
-        }
-        else {
-            displayResult.textContent = "That's NOT in the word";
-        }
-
-    };
+function writePage() {
+    document.getElementById('wordView').innerHTML = wordView.join(" ");
+    document.getElementById('dialogueView').innerText = dialogue;
+    document.getElementById('missView').innerText = "Misses: " + miss + " of 10";
+    document.getElementById('guessListView').innerHTML = guessList;
+    document.getElementById('defView').innerHTML = defDisplay;
+    document.getElementById('reset-box').innerHTML = resetButton;
 };

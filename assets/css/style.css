@@ -1,28 +1,68 @@
 body {
     text-align: center;
+    background-image: url(../images/background.jpg);
 }
 
-div {
-    border: solid;
+#wordView {
+    font-family: 'Monoton', cursive;
+    font-size: 80px;
+    background-color: darkslategray;
+    color: darkslategray;
+    padding: 20px;
+    opacity: .75;
+    margin-bottom: 10px;
 }
 
-#letter-box {
-    background-color: rgb(212, 212, 94);
+#defView {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 50%;
+    margin: -10px auto auto;    
 }
 
-#result {
-    background-color: aquamarine;
+#def {
+    background-color: beige;
+    color: darkslategray;
+    opacity: .75;
+    padding: 20px;
+    border-bottom-right-radius: 15px; 
+    border-bottom-left-radius: 15px;
 }
 
-#guessed-letters {
-    background-color: grey;
+#dialogueView, 
+#missView, 
+#guessListView {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 10px;
+    font-size: 40px;
+    color: beige;
+    opacity: .75;
 }
 
-#guess-box {
-    background-color: blueviolet;
+input {
+    margin-top: 40px;
+    padding: 15px;
+    color: beige;
+    background-color: darkslategray;
+    border-color: 1px;
+    border-radius: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    opacity: .75;
+    font-size: 20px;
 }
 
-#score-box {
-    background-color: orange;
+#guessListView {
+    background-color: darkslategray;
+    vertical-align: middle;
+    height: 50px;
 }
 
+#missView {
+    margin: 20px;
+}
+ span {
+     background-color: beige;
+ }
+
+ #guessList {
+     font-size: 30px;
+ }
