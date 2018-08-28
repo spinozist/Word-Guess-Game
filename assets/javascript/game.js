@@ -31,6 +31,7 @@ var guessList = [];
 var correctList = [];
 var defDisplay = [];
 var resetButton = [];
+var wordCheck = [];
 
 //Select word at random//
 
@@ -51,54 +52,59 @@ dialogue = "Guess a letter."
 
 writePage();
 
-
-
 document.onkeydown = function (event) {
 
     var userInput = event.key;
 
     if (alphabet.includes(userInput)) {
 
-    if (guessList.length < 9) {
+        if (guessList.length < 9) {
 
-        if (correctLetters.includes(userInput)) {
+            if (correctLetters.includes(userInput)) {
 
-            correctList.push(userInput);
+                correctList.push(userInput);
 
-            for (var i = 0; i < correctLetters.length; i++) {
-                if (correctList.includes(correctLetters[i])) {
-                    wordView.splice(i, 1, "<span>" + correctLetters[i] + "</span>");
-                    dialogue = "Great Job!";
-                    writePage();
+                for (var i = 0; i < correctLetters.length; i++) {
+                    if (correctList.includes(correctLetters[i])) {
+                        wordView.splice(i, 1, "<span>" + correctLetters[i] + "</span>");
+                        dialogue = "Great Job!";
+
+                        //End Game Conditional//
+                        
+                        writePage();
+                    } else {
+                        wordView.splice(i, 1, "<span>_</span>");
+                    }
+                }
+
+
+            }
+
+            else {
+                if (guessList.includes(userInput)) {
+                    dialogue = "You already guessed that letter. Guess another.";
                 } else {
-                    wordView.splice(i, 1, "<span>_</span>");
+                    dialogue = "Nope! Try again.";
+                    guessList.push(userInput);
+                    miss++;
+
+                    //Write HTML to add images div layout//
                 }
             }
         }
 
         else {
-            if (guessList.includes(userInput)) {
-                dialogue = "You already guessed that letter. Guess another.";
-            } else {
-                dialogue = "Nope! Try again.";
-                guessList.push(userInput);
-                miss++;
-            }
+            dialogue = "Here's a hint.";
+            miss++;
+            defDisplay = "<div id='def'>" + wordDef[wordList.indexOf(selectWord)] + "</div>";
+            resetButton = "<input id='resetButton' type='button' value='Try Again' onClick='window.location.reload()'>";
         }
+
     }
 
     else {
-        dialogue = "Here's a hint.";
-        miss++;
-        defDisplay = "<div id='def'>" + wordDef[wordList.indexOf(selectWord)] + "</div>";
-        resetButton = "<input id='resetButton' type='button' value='Try Again' onClick='window.location.reload()'>";
+        dialogue = "Guess a LETTER."
     }
-
-}
-
-else {
-    dialogue = "Guess a LETTER."
-}
 
 
 
@@ -114,4 +120,5 @@ function writePage() {
     document.getElementById('guessListView').innerHTML = guessList;
     document.getElementById('defView').innerHTML = defDisplay;
     document.getElementById('reset-box').innerHTML = resetButton;
+    //Endgame Write Function//
 };
