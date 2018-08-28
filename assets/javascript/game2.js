@@ -1,18 +1,33 @@
 
 var wordList = [
-    "racist",
-    "misogynist",
-    "idiot",
-    "dumbass",
-    "weak",
-    "mean",
-    "childish",
+    "ipseity",
+    "ontology",
+    "autopoiesis",
+    "assemblage",
+    "différance ",
+    "virtual",
+    "becoming",
+    "epistemology",
 ];
+
+var wordDef = [
+    "(n): individual identity : SELFHOOD",
+    "(n): : a particular theory about the nature of being or the kinds of things that have existence",
+    "(n): the property of a living system (such as a bacterial cell or a multicellular organism) that allows it to maintain and renew itself by regulating its composition and conserving its boundaries",
+    "(n): a collection of persons or things : GATHERING",
+    "(n): difference and deferral of meaning",
+    "(adj): of, relating to, or being a hypothetical particle whose existence is inferred from indirect evidence def",
+    "(n): the process of coming to be something or of passing into a state",
+    "(n): the study or a theory of the nature and grounds of knowledge especially with reference to its limits and validity",
+];
+
 
 var dialogue = [];
 var miss = 0;
 var guessList = [];
 var correctList = [];
+var defDisplay = [];
+var resetButton = [];
 
 //Select word at random//
 
@@ -39,32 +54,40 @@ document.onkeydown = function (event) {
 
     var userInput = event.key;
 
-    if (correctLetters.includes(userInput)) {
+    if (guessList.length < 9) {
 
-        correctList.push(userInput);
+        if (correctLetters.includes(userInput)) {
 
-        for (var i = 0; i < correctLetters.length; i++) {
-            if (correctList.includes(correctLetters[i])) {
-                wordView.splice(i, 1, "<span>" + correctLetters[i] + "</span>");
-                dialogue = "Great Job!";
-                writePage();
-            } else {
-                wordView.splice(i, 1, "<span>_</span>");
+            correctList.push(userInput);
+    
+            for (var i = 0; i < correctLetters.length; i++) {
+                if (correctList.includes(correctLetters[i])) {
+                    wordView.splice(i, 1, "<span>" + correctLetters[i] + "</span>");
+                    dialogue = "Great Job!";
+                    writePage();
+                } else {
+                    wordView.splice(i, 1, "<span>_</span>");
+                }
             }
-
+        }
+    
+        else {
+            if (guessList.includes(userInput)) {
+                dialogue = "You already guessed that letter. Guess another.";
+            } else {
+                dialogue = "Nope! Try again.";
+                guessList.push(userInput);
+                miss++;
+            }
         }
     }
 
     else {
-        if (guessList.includes(userInput)) {
-            dialogue = "You already guessed that letter. Guess another.";
-        } else {
-            dialogue = "Nope! Try again.";
-            guessList.push(userInput);
-            miss++;
-        }
-
+        defDisplay = "<div id='def'>" + wordDef[wordList.indexOf (selectWord)] + "</div>";
+        resetButton = "<input id='resetButton' type='button' value='Try Again' onClick='window.location.reload()'>";
     }
+
+
 
     writePage();
 };
@@ -72,8 +95,10 @@ document.onkeydown = function (event) {
 // Writes to page //
 
 function writePage() {
-    document.getElementById('wordView').innerHTML = wordView;
+    document.getElementById('wordView').innerHTML = wordView.join(" ");
     document.getElementById('dialogueView').innerText = dialogue;
-    document.getElementById('missView').innerText = miss;
+    document.getElementById('missView').innerText = "Misses: " + miss + " of 10";
     document.getElementById('guessListView').innerHTML = guessList;
+    document.getElementById('defView').innerHTML = defDisplay;
+    document.getElementById('reset-box').innerHTML = resetButton;
 };

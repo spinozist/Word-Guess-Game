@@ -1,15 +1,31 @@
 body {
     text-align: center;
-
+    background-image: url(../images/background.jpg);
 }
 
 #wordView {
-    font-size: 36px;
-    background-color: blueviolet;
-    color: beige;
+    font-family: 'Monoton', cursive;
+    font-size: 80px;
+    background-color: darkslategray;
+    color: darkslategray;
     padding: 20px;
     opacity: .75;
     margin-bottom: 10px;
+}
+
+#defView {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 50%;
+    margin: -10px auto auto;    
+}
+
+#def {
+    background-color: beige;
+    color: darkslategray;
+    opacity: .75;
+    padding: 20px;
+    border-bottom-right-radius: 15px; 
+    border-bottom-left-radius: 15px;
 }
 
 #dialogueView, 
@@ -17,4 +33,36 @@ body {
 #guessListView {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding: 10px;
+    font-size: 40px;
+    color: beige;
+    opacity: .75;
 }
+
+input {
+    margin-top: 40px;
+    padding: 15px;
+    color: beige;
+    background-color: darkslategray;
+    border-color: 1px;
+    border-radius: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    opacity: .75;
+    font-size: 20px;
+}
+
+#guessListView {
+    background-color: darkslategray;
+    vertical-align: middle;
+    height: 50px;
+}
+
+#missView {
+    margin: 20px;
+}
+ span {
+     background-color: beige;
+ }
+
+ #guessList {
+     font-size: 30px;
+ }
