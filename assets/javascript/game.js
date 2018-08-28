@@ -4,7 +4,7 @@ var wordList = [
     "ontology",
     "autopoiesis",
     "assemblage",
-    "différance ",
+    "differance",
     "virtual",
     "becoming",
     "epistemology",
@@ -16,11 +16,14 @@ var wordDef = [
     "(n): the property of a living system (such as a bacterial cell or a multicellular organism) that allows it to maintain and renew itself by regulating its composition and conserving its boundaries",
     "(n): a collection of persons or things : GATHERING",
     "(n): difference and deferral of meaning",
-    "(adj): of, relating to, or being a hypothetical particle whose existence is inferred from indirect evidence def",
+    "(adj): of, relating to, or being a hypothetical particle whose existence is inferred from indirect evidence",
     "(n): the process of coming to be something or of passing into a state",
     "(n): the study or a theory of the nature and grounds of knowledge especially with reference to its limits and validity",
 ];
 
+var alphabet = [
+    "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+];
 
 var dialogue = [];
 var miss = 0;
@@ -54,12 +57,14 @@ document.onkeydown = function (event) {
 
     var userInput = event.key;
 
+    if (alphabet.includes(userInput)) {
+
     if (guessList.length < 9) {
 
         if (correctLetters.includes(userInput)) {
 
             correctList.push(userInput);
-    
+
             for (var i = 0; i < correctLetters.length; i++) {
                 if (correctList.includes(correctLetters[i])) {
                     wordView.splice(i, 1, "<span>" + correctLetters[i] + "</span>");
@@ -70,7 +75,7 @@ document.onkeydown = function (event) {
                 }
             }
         }
-    
+
         else {
             if (guessList.includes(userInput)) {
                 dialogue = "You already guessed that letter. Guess another.";
@@ -83,9 +88,17 @@ document.onkeydown = function (event) {
     }
 
     else {
-        defDisplay = "<div id='def'>" + wordDef[wordList.indexOf (selectWord)] + "</div>";
+        dialogue = "Here's a hint.";
+        miss++;
+        defDisplay = "<div id='def'>" + wordDef[wordList.indexOf(selectWord)] + "</div>";
         resetButton = "<input id='resetButton' type='button' value='Try Again' onClick='window.location.reload()'>";
     }
+
+}
+
+else {
+    dialogue = "Guess a LETTER."
+}
 
 
 
