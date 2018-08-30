@@ -12,11 +12,11 @@ var wordList = [
 
 var wordDef = [
     "(n): individual identity : SELFHOOD",
-    "(n): : a particular theory about the nature of being or the kinds of things that have existence",
+    "(n): a particular theory about the nature of being or the kinds of things that have existence",
     "(n): the property of a living system (such as a bacterial cell or a multicellular organism) that allows it to maintain and renew itself by regulating its composition and conserving its boundaries",
     "(n): a collection of persons or things : GATHERING",
     "(n): difference and deferral of meaning",
-    "(adj): of, relating to, or being a hypothetical particle whose existence is inferred from indirect evidence",
+    "(adj): existing in essence or effect though not actual fact",
     "(n): the process of coming to be something or of passing into a state",
     "(n): the study or a theory of the nature and grounds of knowledge especially with reference to its limits and validity",
 ];
