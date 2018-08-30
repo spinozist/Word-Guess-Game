@@ -67,7 +67,7 @@ document.onkeydown = function (event) {
             for (var i = 0; i < correctLetters.length; i++) {
                 if (correctList.includes(correctLetters[i])) {
                     wordView.splice(i, 1, "<span>" + correctLetters[i] + "</span>");
-                    dialogue = "Great Job!";
+                    dialogue = "Great Job! Keep guessing.";
                     correctTally.splice(i, 1, 1);
                     if (correctTally.reduce(getSum) === correctLetters.length) {
                         dialogue = "You win!";
