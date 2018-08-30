@@ -43,14 +43,22 @@ var selectWord = wordList[Math.floor(Math.random() * wordList.length)];
 var correctLetters = Array.from(selectWord);
 
 var wordView = [];
+var correctTally = [];
+
 
 for (var i = 0; i < correctLetters.length; i++) {
     wordView.splice(i, 1, "<span>_</span>");
+    correctTally.splice(i, 1, 0);
 }
 
 dialogue = "Guess a letter."
 
 writePage();
+
+var getSum = function (total, num) {
+    return total + num;
+}
+
 
 document.onkeydown = function (event) {
 
@@ -58,60 +66,65 @@ document.onkeydown = function (event) {
 
     if (alphabet.includes(userInput)) {
 
-        if (guessList.length < 9) {
+        if (guessList.includes(userInput) ||
+            correctList.includes(userInput)) {
+            dialogue = "You already guessed that letter. Guess another.";
+            writePage();
+        }
 
-            if (correctLetters.includes(userInput)) {
 
-                correctList.push(userInput);
+        else if (correctLetters.includes(userInput)) {
 
-                for (var i = 0; i < correctLetters.length; i++) {
-                    if (correctList.includes(correctLetters[i])) {
-                        wordView.splice(i, 1, "<span>" + correctLetters[i] + "</span>");
-                        dialogue = "Great Job!";
+            correctList.push(userInput);
 
-                        //End Game Conditional//
-                        
-                        writePage();
-                    } else {
-                        wordView.splice(i, 1, "<span>_</span>");
+            for (var i = 0; i < correctLetters.length; i++) {
+                if (correctList.includes(correctLetters[i])) {
+                    wordView.splice(i, 1, "<span>" + correctLetters[i] + "</span>");
+                    dialogue = "Great Job!";
+                    correctTally.splice(i, 1, 1);
+                    if (correctTally.reduce(getSum) === correctLetters.length) {
+                        dialogue = "You win!";
+                        defDisplay = "<div id='def'>" + wordDef[wordList.indexOf(selectWord)] + "</div>";
+                        resetButton = "<input id='resetButton' type='button' value='Play Again' onClick='window.location.reload()'>";
+                        document.onkeydown = function (event) {
+                            event.preventDefault();
+                        }
                     }
+                    writePage();
                 }
-
-
-            }
-
-            else {
-                if (guessList.includes(userInput)) {
-                    dialogue = "You already guessed that letter. Guess another.";
-                } else {
-                    dialogue = "Nope! Try again.";
-                    guessList.push(userInput);
-                    miss++;
-
-                    //Write HTML to add images div layout//
+                else {
+                    wordView.splice(i, 1, "<span>_</span>");
+                    writePage();
                 }
             }
         }
 
         else {
-            dialogue = "Here's a hint.";
+            dialogue = "Nope! Try again.";
+            guessList.push(userInput);
             miss++;
-            defDisplay = "<div id='def'>" + wordDef[wordList.indexOf(selectWord)] + "</div>";
-            resetButton = "<input id='resetButton' type='button' value='Try Again' onClick='window.location.reload()'>";
+            if (miss === 10) {
+                dialogue = "Game over.  Here's a hint:";
+                defDisplay = "<div id='def'>" + wordDef[wordList.indexOf(selectWord)] + "</div>";
+                resetButton = "<input id='resetButton' type='button' value='Play Again' onClick='window.location.reload()'>";
+                document.onkeydown = function (event) {
+                    event.preventDefault();
+                }
+            }
+            writePage();
         }
-
     }
 
     else {
         dialogue = "Guess a LETTER."
+        writePage();
     }
+}
 
 
 
-    writePage();
-};
 
-// Writes to page //
+// Wites to page //
 
 function writePage() {
     document.getElementById('wordView').innerHTML = wordView.join(" ");
