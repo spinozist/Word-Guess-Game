@@ -25,40 +25,28 @@ var alphabet = [
     "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
 ];
 
+var selectWord = wordList[Math.floor(Math.random() * wordList.length)];
+var correctLetters = Array.from(selectWord);
 var dialogue = [];
 var miss = 0;
 var guessList = [];
 var correctList = [];
 var defDisplay = [];
 var resetButton = [];
-var wordCheck = [];
-
-//Select word at random//
-
-var selectWord = wordList[Math.floor(Math.random() * wordList.length)];
-
-//Game interface and logic//
-
-
-var correctLetters = Array.from(selectWord);
-
 var wordView = [];
 var correctTally = [];
-
+var getSum = function (total, num) {
+    return total + num;
+};
 
 for (var i = 0; i < correctLetters.length; i++) {
     wordView.splice(i, 1, "<span>_</span>");
     correctTally.splice(i, 1, 0);
-}
+};
 
-dialogue = "Guess a letter."
+dialogue = "Guess a letter.";
 
 writePage();
-
-var getSum = function (total, num) {
-    return total + num;
-}
-
 
 document.onkeydown = function (event) {
 
@@ -71,7 +59,6 @@ document.onkeydown = function (event) {
             dialogue = "You already guessed that letter. Guess another.";
             writePage();
         }
-
 
         else if (correctLetters.includes(userInput)) {
 
@@ -92,11 +79,12 @@ document.onkeydown = function (event) {
                     }
                     writePage();
                 }
+
                 else {
                     wordView.splice(i, 1, "<span>_</span>");
                     writePage();
                 }
-            }
+            };
         }
 
         else {
@@ -112,17 +100,14 @@ document.onkeydown = function (event) {
                 }
             }
             writePage();
-        }
+        };
     }
 
     else {
         dialogue = "Guess a LETTER."
         writePage();
     }
-}
-
-
-
+};
 
 // Wites to page //
 
@@ -133,5 +118,4 @@ function writePage() {
     document.getElementById('guessListView').innerHTML = guessList;
     document.getElementById('defView').innerHTML = defDisplay;
     document.getElementById('reset-box').innerHTML = resetButton;
-    //Endgame Write Function//
 };
