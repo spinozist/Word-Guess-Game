@@ -34,9 +34,15 @@ var correctList = [];
 var defDisplay = [];
 var resetButton = [];
 var wordView = [];
+var missImage = [];
 var correctTally = [];
+
 var getSum = function (total, num) {
     return total + num;
+};
+
+var drawReset = function () {
+    resetButton = "<input id='resetButton' type='button' value='Play Again' onClick='window.location.reload()'>";
 };
 
 for (var i = 0; i < correctLetters.length; i++) {
@@ -72,7 +78,7 @@ document.onkeydown = function (event) {
                     if (correctTally.reduce(getSum) === correctLetters.length) {
                         dialogue = "You win!";
                         defDisplay = "<div id='def'>" + wordDef[wordList.indexOf(selectWord)] + "</div>";
-                        resetButton = "<input id='resetButton' type='button' value='Play Again' onClick='window.location.reload()'>";
+                        drawReset();
                         document.onkeydown = function (event) {
                             event.preventDefault();
                         }
@@ -91,13 +97,15 @@ document.onkeydown = function (event) {
             dialogue = "Nope! Try again.";
             guessList.push(userInput);
             miss++;
-            if (miss === 10) {
+            missImage = "<img src='assets/images/miss-" + miss + ".png'>"
+
+            if (miss === 8) {
                 dialogue = "Game over.  Here's a hint:";
                 defDisplay = "<div id='def'>" + wordDef[wordList.indexOf(selectWord)] + "</div>";
-                resetButton = "<input id='resetButton' type='button' value='Play Again' onClick='window.location.reload()'>";
                 document.onkeydown = function (event) {
                     event.preventDefault();
-                }
+                };
+                drawReset();
             }
             writePage();
         };
@@ -112,10 +120,11 @@ document.onkeydown = function (event) {
 // Wites to page //
 
 function writePage() {
-    document.getElementById('wordView').innerHTML = wordView.join(" ");
-    document.getElementById('dialogueView').innerText = dialogue;
-    document.getElementById('missView').innerText = "Misses: " + miss + " of 10";
-    document.getElementById('guessListView').innerHTML = guessList;
-    document.getElementById('defView').innerHTML = defDisplay;
-    document.getElementById('reset-box').innerHTML = resetButton;
+    $("#wordView").html(wordView.join(" "));
+    $("#dialogueView").text(dialogue);
+    $("#missView").text("Misses: " + miss + " of 8");
+    $("#guessListView").html(guessList.join(" "));
+    $("#defView").html(defDisplay);
+    $("#image-box").html(missImage);
+    $("#reset-box").html(resetButton);
 };

@@ -40,7 +40,6 @@ body {
 }
 
 input {
-    margin-top: 40px;
     padding: 15px;
     color: beige;
     background-color: darkslategray;
@@ -49,21 +48,41 @@ input {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     opacity: .75;
     font-size: 20px;
+    margin-bottom: 40px;
 }
 
 #guessListView {
     background-color: darkslategray;
     vertical-align: middle;
     height: 50px;
+    margin-bottom: 40px;
 }
 
 #missView {
-    margin: 20px;
+    margin: 50px;
 }
  span {
      background-color: beige;
  }
 
- #guessList {
-     font-size: 30px;
- }
+img {
+    width: 100%;
+    /* z-index: -1;
+    left: 0px;
+    top: 0px;
+    position: fixed;
+    float: center; */
+}
+
+#guessList {
+    font-size: 30px;
+}
+
+#image-box {
+    margin: auto;
+    text-align: center;
+    background-color: beige;
+    opacity: .75;
+    width: 40%;
+    border-radius: 15%;
+}
