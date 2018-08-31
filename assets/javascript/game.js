@@ -55,7 +55,7 @@ dialogue = "Guess a letter.";
 
 writePage();
 
-document.onclick = function (){
+window.onload = function (){
     $("#foo").focus();
 
 }
