@@ -52,7 +52,13 @@ for (var i = 0; i < correctLetters.length; i++) {
 
 dialogue = "Guess a letter.";
 
+
 writePage();
+
+document.onclick = function (){
+    $("#foo").focus();
+
+}
 
 document.onkeydown = function (event) {
 
