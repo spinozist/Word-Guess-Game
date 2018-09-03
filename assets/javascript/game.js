@@ -36,6 +36,12 @@ var resetButton = [];
 var wordView = [];
 var missImage = [];
 var correctTally = [];
+var alerts = [
+    "assets/alerts/correct.mp3",
+    "assets/alerts/miss.mp3",
+    "assets/alerts/win.mp3",
+    "assets/alerts/lose.mp3",
+];
 
 var getSum = function (total, num) {
     return total + num;
@@ -51,14 +57,11 @@ for (var i = 0; i < correctLetters.length; i++) {
 };
 
 dialogue = "Guess a letter.";
-
+window.onload = function () {
+    $("#foo").focus();
+}
 
 writePage();
-
-window.onload = function (){
-    $("#foo").focus();
-
-}
 
 document.onkeydown = function (event) {
 
@@ -79,8 +82,11 @@ document.onkeydown = function (event) {
             for (var i = 0; i < correctLetters.length; i++) {
                 if (correctList.includes(correctLetters[i])) {
                     wordView.splice(i, 1, "<span>" + correctLetters[i] + "</span>");
-                    dialogue = "Great Job! Keep guessing.";
-                    correctTally.splice(i, 1, 1);
+                    dialogue = "Great Job! Keep guessing."
+                    correctTally.splice(i, 1, 1)
+                    var alert = new Audio(alerts[0]);
+                    alert.play();;
+
                     if (correctTally.reduce(getSum) === correctLetters.length) {
                         dialogue = "You win!";
                         defDisplay = "<div id='def'>" + wordDef[wordList.indexOf(selectWord)] + "</div>";
@@ -88,6 +94,8 @@ document.onkeydown = function (event) {
                         document.onkeydown = function (event) {
                             event.preventDefault();
                         }
+                        var alert = new Audio(alerts[2]);
+                        alert.play();
                     }
                     writePage();
                 }
@@ -104,6 +112,8 @@ document.onkeydown = function (event) {
             guessList.push(userInput);
             miss++;
             missImage = "<img src='assets/images/miss-" + miss + ".png'>"
+            var alert = new Audio(alerts[1]);
+            alert.play();
 
             if (miss === 8) {
                 dialogue = "Game over.  Here's a hint:";
@@ -112,6 +122,8 @@ document.onkeydown = function (event) {
                     event.preventDefault();
                 };
                 drawReset();
+                var alert = new Audio(alerts[3]);
+                    alert.play();;
             }
             writePage();
         };
