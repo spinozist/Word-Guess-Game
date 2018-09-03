@@ -37,10 +37,10 @@ var wordView = [];
 var missImage = [];
 var correctTally = [];
 var alerts = [
-    "assets/alerts/correct.mp3",
-    "assets/alerts/miss.mp3",
-    "assets/alerts/win.mp3",
-    "assets/alerts/lose.mp3",
+    "../alerts/correct.mp3",
+    "../alerts/miss.mp3",
+    "../alerts/win.mp3",
+    "../alerts/lose.mp3",
 ];
 
 var getSum = function (total, num) {
